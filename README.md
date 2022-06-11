@@ -16,15 +16,11 @@ If you can not use only these methods you can create a new controller. Look at A
 
 Follow the same structure on front end as I have been doing.
 
+Do not hesitate to reach out to me of something is not clear or if you need any help. I want to test our ability to communicate as well.
+
 ## Todo
 
-* Create a new model called Product and build out the UI and everything to be able to create, update, view and delete products. A product should have
- - A title
- - A description
- - What category (dropdown from the categories table)
- - A price
- - In stock (true/false) - (radio button)
- - An image.
+* Create a new model called Product and build out the UI and everything to be able to create, update, view and delete products. A product should have: Title, Description, Category (should come from categories database and be a dropdown/select), A price, In stock (radio button Yes/No), an image.
 * Make sure that there is some success UI to know that you have successfully created, updated or deleted the product.
 * Add the success UI to categories as well.
 * Create tests for the store, update and delete route.
