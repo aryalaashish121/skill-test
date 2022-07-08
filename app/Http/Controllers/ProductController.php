@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Product\CreateProduct;
+use App\Actions\Product\CreateProductAction;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
@@ -45,7 +46,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $product = app(CreateProduct::class)->execute($request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$request->image);
+        $product = app(CreateProductAction::class)->execute($request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$request->image);
         return Redirect::route('products.edit',$product);
     }
 
@@ -66,9 +67,12 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit(Product $product):Response
     {
-        //
+        return Inertia::render('Products/Edit',[
+            'product'=>$product,
+            'categories'=>Category::all()
+        ]);
     }
 
     /**
@@ -80,7 +84,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        dd($request->all());
     }
 
     /**

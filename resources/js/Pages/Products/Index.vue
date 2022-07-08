@@ -8,13 +8,13 @@
         <div class="max-w-7xl mx-auto mt-8 sm:px-6 lg:px-8">
             <div class="bg-white shadow overflow-hidden sm:rounded-md">
                 <ul v-if="props.products.length> 0" role="list" class="divide-y divide-gray-200">
-                    <li v-for="category in props.products" :key="category.id">
-                        <Link :href="route('categories.edit', {category: category.id})" class="block hover:bg-gray-50">
+                    <li v-for="product in props.products" :key="product.id">
+                        <Link :href="route('products.edit', {product: product.id})" class="block hover:bg-gray-50">
                             <div class="px-4 py-4 flex items-center sm:px-6">
                                 <div class="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
                                     <div class="truncate">
                                         <div class="flex text-sm">
-                                            <p class="font-medium text-indigo-600 truncate" v-text="category.title" />
+                                            <p class="font-medium text-indigo-600 truncate" v-text="product.title" />
                                         </div>
                                         <div class="mt-2 flex">
                                             <div class="flex items-center text-sm text-gray-500">
@@ -28,8 +28,8 @@
                                                 </svg>
                                                 <p>
                                                     Created on
-                                                    <time :datetime="category.created_at"
-                                                        v-text="category.created_at" />
+                                                    <time :datetime="product.created_at"
+                                                        v-text="product.created_at" />
                                                 </p>
                                             </div>
                                         </div>
