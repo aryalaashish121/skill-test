@@ -50,6 +50,6 @@ import { useForm } from '@inertiajs/inertia-vue3'
 
 const form = useForm({
     title: '',
-    description: ''
+    description: '',
 })
 </script>

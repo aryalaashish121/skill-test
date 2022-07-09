@@ -88,6 +88,10 @@ const props = defineProps({
         type: Array,
         required: true
     },
+    errors:{
+        type:Object,
+        required:false
+    }
 
 })
 const form = useForm({
@@ -96,7 +100,7 @@ const form = useForm({
     category_id:null,
     price:'',
     in_stock:1,
-    image:''
+    image:'',
 })
 
 </script>

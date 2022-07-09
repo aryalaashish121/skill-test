@@ -21798,6 +21798,10 @@ __webpack_require__.r(__webpack_exports__);
     categories: {
       type: Array,
       required: true
+    },
+    errors: {
+      type: Object,
+      required: false
     }
   },
   setup: function setup(__props, _ref) {

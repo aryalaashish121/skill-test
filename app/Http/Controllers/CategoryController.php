@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CreateCategory;
 use App\Actions\UpdateCategory;
 use App\Models\Category;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -45,12 +46,10 @@ class CategoryController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // If we had any authorization, it would be here.
-
-        $request->validate([
+       $request->validate([
             'title' => ['required'],
             'description' => ['required']
         ]);
-
         $category = app(CreateCategory::class)->execute($request->title, $request->description);
         return Redirect::route('categories.index', $category)->with('success',"Added successfully");
     }
