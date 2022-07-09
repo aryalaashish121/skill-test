@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Actions\Product\CreateProduct;
 use App\Actions\Product\CreateProductAction;
+use App\Actions\Product\UpdateProductAction;
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
@@ -84,7 +83,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        dd($request->all());
+        $updatedProduct = app(UpdateProductAction::class)->execute($product,$request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$request->image);
+        return Redirect::route('products.edit',$product);
+
     }
 
     /**
@@ -95,6 +96,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return Redirect::route('products.index');
     }
 }

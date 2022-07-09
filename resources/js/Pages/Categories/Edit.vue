@@ -11,7 +11,8 @@
                     <div class="md:col-span-1">
                         <div class="px-4 sm:px-0">
                             <h3 class="text-lg font-medium leading-6 text-gray-900">Category</h3>
-                            <p class="mt-1 text-sm text-gray-600">Edit the category by updating the title and adescription</p>
+
+                            <p class="mt-1 text-sm text-gray-600">Edit the category by updating the title and adescription </p>
                         </div>
                     </div>
                     <div class="mt-5 md:mt-0 md:col-span-2">
@@ -39,9 +40,20 @@
                                         <p class="mt-2 text-sm text-gray-500">Brief description for the category.</p>
                                     </div>
                                 </div>
-                                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex flex-row-reverse">
+                                      <div class="flex">
                                     <button type="submit"
-                                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update</button>
+                                        class="inline-flex ml-2 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Update</button>
+
+                                    </div>
+                                    <div class="flex">
+                                    <form  @submit.prevent="form.delete(route('categories.delete', {category: props.category.id}))">
+                                      <button  type="submit"
+                                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</button>
+                                   </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </form>
@@ -53,12 +65,17 @@
 </template>
 
 <script setup>
+import { Inertia } from '@inertiajs/inertia';
 import { useForm } from '@inertiajs/inertia-vue3'
 
 const props = defineProps({
     category: {
         type: Object,
         required: true
+    },
+    success:{
+        type:String,
+        required:false
     }
 })
 

@@ -23,9 +23,8 @@ class CategoryController extends Controller
     {
         return Inertia::render('Categories/Index', [
             'categories' => Category::all()
-        ]);
+        ])->with('message',"Added successfully");
     }
-
     /**
      * Show the create category view.
      *
@@ -53,8 +52,7 @@ class CategoryController extends Controller
         ]);
 
         $category = app(CreateCategory::class)->execute($request->title, $request->description);
-
-        return Redirect::route('categories.edit', $category);
+        return Redirect::route('categories.index', $category)->with('success',"Added successfully");
     }
 
     /**
@@ -90,5 +88,11 @@ class CategoryController extends Controller
         $category = app(UpdateCategory::class)->execute($category, $request->title, $request->description);
 
         return Redirect::back();
+    }
+
+    public function destroy(Category $category)
+    {
+        $category->delete();
+        return Redirect::route('categories.index')->with('message','Category deleted successfully.');
     }
 }

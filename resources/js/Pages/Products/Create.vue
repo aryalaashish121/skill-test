@@ -10,8 +10,9 @@
                 <div class="md:grid md:grid-cols-3 md:gap-6">
                     <div class="md:col-span-1">
                         <div class="px-4 sm:px-0">
-                            <h3 class="text-lg font-medium leading-6 text-gray-900">Category</h3>
-                            <p class="mt-1 text-sm text-gray-600">Create a new cateogry by adding a title and a description</p>
+                            <h3 class="text-lg font-medium leading-6 text-gray-900">Product</h3>
+                            <p class="mt-1 text-sm text-gray-600">Create a new product by adding a title and a description</p>
+
                         </div>
                     </div>
                     <div class="mt-5 md:mt-0 md:col-span-2">
@@ -19,21 +20,21 @@
                             <div class="shadow sm:rounded-md sm:overflow-hidden">
                                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                     <div class="">
-                                        <label for="category-title" class="block text-sm font-medium text-gray-700">Title</label>
+                                        <label for="product-title" class="block text-sm font-medium text-gray-700">Title</label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
-                                            <input v-model="form.title" type="text" id="category-title" :class="{'border-red-500': form.errors.title}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="Title">
+                                            <input v-model="form.title" type="text" id="product-title" :class="{'border-red-500': form.errors.title}" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300" placeholder="Title">
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label for="category-description" class="block text-sm font-medium text-gray-700">Description</label>
+                                        <label for="product-description" class="block text-sm font-medium text-gray-700">Description</label>
                                         <div class="mt-1">
-                                            <textarea v-model="form.description" id="category-description" rows="3" :class="{'border-red-500': form.errors.description}" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Description"></textarea>
+                                            <textarea v-model="form.description" id="product-description" rows="3" :class="{'border-red-500': form.errors.description}" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md" placeholder="Description"></textarea>
                                         </div>
-                                        <p class="mt-2 text-sm text-gray-500">Brief description for the category.</p>
+                                        <p class="mt-2 text-sm text-gray-500">Brief description for the product.</p>
                                     </div>
                                 <div>
-                                    <label for="category" class="block text-sm font-medium text-gray-700">Select category</label>
+                                    <label for="product" class="block text-sm font-medium text-gray-700">Select category</label>
                                     <div class="mt-1">
                                         <select v-model="form.category_id" id="countries" :class="{'border-red-500': form.errors.category}" class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md">
                                       <option  class="mt-2 text-sm text-gray-500" :value="null">Choose a category</option>
@@ -62,7 +63,7 @@
                                 </div>
                                 <div>
                                      <label for="product-image" class="block text-sm font-medium text-gray-700">Product image</label>
-                                    <input class="block mb-5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="product_image" v-on:change="uploadImage" type="file">
+                                    <input class="block mb-5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="product_image" v-on:input="form.image = $event.target.files[0]" type="file">
 
                                 </div>
                                 </div>
@@ -81,21 +82,14 @@
 
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3'
+import { computed } from '@vue/runtime-core';
 const props = defineProps({
     categories: {
         type: Array,
         required: true
-    }
+    },
+
 })
-
-
-
-function uploadImage(e)
-{
-    form.image = e.target.files[0];
-    console.log(e.target.files[0]);
-}
-
 const form = useForm({
     title: '',
     description: '',
@@ -104,4 +98,5 @@ const form = useForm({
     in_stock:1,
     image:''
 })
+
 </script>

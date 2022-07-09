@@ -19,7 +19,10 @@
         </nav>
 
         <div class="py-10">
-            <slot></slot>
+            <div v-if="$page.props.flash?.message">
+            {{$page.props.flash}}
+            </div>
+                <slot></slot>
         </div>
     </div>
 </template>

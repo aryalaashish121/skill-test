@@ -15,7 +15,7 @@
                         </div>
                     </div>
                     <div class="mt-5 md:mt-0 md:col-span-2">
-                        <form @submit.prevent="form.patch(route('products.update', {product: props.product.id}))">
+                        <form @submit.prevent="form.patch(route('products.update', {product: props.product}))">
                             <div class="shadow sm:rounded-md sm:overflow-hidden">
                                 <div class="px-4 py-5 bg-white space-y-6 sm:p-6">
                                     <div class="">
@@ -72,9 +72,21 @@
 
                                 </div>
                                 </div>
-                                <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+
+                               <div class="px-4 py-3 bg-gray-50 text-right sm:px-6 flex flex-row-reverse">
+                                      <div class="flex">
                                     <button type="submit"
-                                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Update</button>
+                                        class="inline-flex ml-2 justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                                        Update</button>
+
+                                    </div>
+                                    <div class="flex">
+                                    <form  @submit.prevent="form.delete(route('products.destroy', {product: props.product.id}))">
+                                      <button  type="submit"
+                                        class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</button>
+                                   </form>
+                                    </div>
+
                                 </div>
                             </div>
                         </form>
@@ -87,6 +99,7 @@
 
 <script setup>
 import { useForm } from '@inertiajs/inertia-vue3'
+import { computed } from '@vue/runtime-core'
 
 const props = defineProps({
     product: {
@@ -96,6 +109,10 @@ const props = defineProps({
     categories: {
         type: Array,
         required: true
+    },
+    message:{
+        type:Array,
+        required:false
     }
 })
 
@@ -106,6 +123,10 @@ const form = useForm({
     price:props.product.price,
     in_stock:props.product.in_stock,
     image:props.product.image
+})
+
+const successMsg = computed((props)=>{
+    return props?.message.success;
 })
 
 </script>

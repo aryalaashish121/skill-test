@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,5 +17,6 @@ Route::get('categories/create', [CategoryController::class, 'create'])->name('ca
 Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
 Route::get('categories/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.delete');
 
 Route::resource('products', ProductController::class);
