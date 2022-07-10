@@ -19,7 +19,6 @@ Route::get('categories/{category}', [CategoryController::class, 'edit'])->name('
 Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.destroy');
 
-// Route::resource('products', ProductController::class);
 Route::prefix('products')->group(function(){
 
     Route::get('/',[ProductController::class,'index'])->name('products.index');
