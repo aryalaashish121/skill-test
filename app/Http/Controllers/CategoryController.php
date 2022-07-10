@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\CreateCategory;
 use App\Actions\UpdateCategory;
 use App\Models\Category;
+use Dotenv\Exception\ValidationException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -23,7 +24,7 @@ class CategoryController extends Controller
     {
         return Inertia::render('Categories/Index', [
             'categories' => Category::all()
-        ])->with('message',"Added successfully");
+        ]);
     }
     /**
      * Show the create category view.
@@ -45,14 +46,15 @@ class CategoryController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // If we had any authorization, it would be here.
-
-        $request->validate([
+       $request->validate([
             'title' => ['required'],
             'description' => ['required']
         ]);
-
         $category = app(CreateCategory::class)->execute($request->title, $request->description);
-        return Redirect::route('categories.index', $category)->with('success',"Added successfully");
+        return Redirect::route('categories.edit', $category)->with([
+            'message'=>__('response.created',['Resource'=>'Category']),
+            'success'=>true
+        ]);
     }
 
     /**
@@ -87,12 +89,19 @@ class CategoryController extends Controller
 
         $category = app(UpdateCategory::class)->execute($category, $request->title, $request->description);
 
-        return Redirect::back();
+        return Redirect::back()->with([
+            'message'=>__('response.updated',['Resource'=>'Category']),
+            'success'=>true
+        ]);
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
-        return Redirect::route('categories.index')->with('message','Category deleted successfully.');
+        return Redirect::route('categories.index')->with([
+            'message'=>__('response.deleted',['Resource'=>'Category']),
+            'success'=>true
+        ]);
+
     }
 }

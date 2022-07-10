@@ -17,7 +17,7 @@ class UpdateProductAction
      * @param string image
      * @return Product
      */
-    public function execute($product,string $title, string $description, int $category_id, int $price,bool $in_stock,string $file): Product
+    public function execute(Product $product,string $title, string $description, int $category_id, int $price,bool $in_stock,string $image): Product
     {
         $product->update([
             'title' => $title,
@@ -25,10 +25,9 @@ class UpdateProductAction
             'price'=>$price,
             'category_id'=>$category_id,
             'price'=>$price,
-            'image'=>'image',
+            'image'=>$image,
             'in_stock'=>$in_stock
         ]);
-
         return $product;
     }
 }

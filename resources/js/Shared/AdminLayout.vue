@@ -18,10 +18,9 @@
             </div>
         </nav>
 
+
         <div class="py-10">
-            <div v-if="$page.props.flash?.message">
-            {{$page.props.flash}}
-            </div>
+            <alert-box v-if="$page.props.flash?.message"  :success="true" :message="$page.props.flash?.message"></alert-box>
                 <slot></slot>
         </div>
     </div>
@@ -29,4 +28,9 @@
 
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3'
+import AlertBox from '../Components/AlertBox.vue';
+// const props = defineProps({
+//     success: String
+// });
+// console.log($page.props);
 </script>
