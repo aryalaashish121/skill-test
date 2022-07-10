@@ -69,7 +69,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return Inertia::render('Products/Show', [
+            'product' => $product->load('category')
+        ]);
     }
 
     /**
@@ -104,7 +106,7 @@ class ProductController extends Controller
         }
         $updatedProduct = app(UpdateProductAction::class)->execute($product,$request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$imageName);
 
-        return Redirect::back()->with([
+        return Redirect::route('products.edit',$product)->with([
             'message'=>__('response.updated',['Resource'=>'Product']),
             'success'=>true
         ]);

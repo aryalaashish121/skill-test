@@ -26,4 +26,8 @@ public $appends = ['cover_image'];
     {
         return asset('uploads/'.$this->image);
     }
+
+    public function category() {
+        return $this->belongsTo(Category::class,'category_id');
+    }
 }

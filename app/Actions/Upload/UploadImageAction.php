@@ -16,7 +16,7 @@ class UploadImageAction
     {
         // $destination_path = 'public/files';
         $file_name = time() . '-' . $file->getClientOriginalName();
-        return $file->storeAs('/files', $file_name,['disk'=>'public']);
+        return $file->storeAs('files', $file_name,['disk'=>'public']);
 
     }
 }
