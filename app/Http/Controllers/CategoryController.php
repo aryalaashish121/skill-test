@@ -51,7 +51,7 @@ class CategoryController extends Controller
             'description' => ['required']
         ]);
         $category = app(CreateCategory::class)->execute($request->title, $request->description);
-        return Redirect::route('categories.index', $category)->with([
+        return Redirect::route('categories.edit', $category)->with([
             'message'=>__('response.created',['Resource'=>'Category']),
             'success'=>true
         ]);

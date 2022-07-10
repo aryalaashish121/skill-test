@@ -95,14 +95,16 @@ class ProductController extends Controller
      */
     public function update(ProductRequest $request, Product $product)
     {
-        $imageName = "";
+
         if($request->hasFile('image'))
         {
             $imageName = app(UploadImageAction::class)->execute($request->image);
+        } else {
+            $imageName = $product->image;
         }
         $updatedProduct = app(UpdateProductAction::class)->execute($product,$request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$imageName);
 
-        return Redirect::back()->setStatusCode(303)->with([
+        return Redirect::back()->with([
             'message'=>__('response.updated',['Resource'=>'Product']),
             'success'=>true
         ]);

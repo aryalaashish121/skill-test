@@ -53,7 +53,7 @@
 
                                     </div>
                                     <div class="flex">
-                                    <form  @submit.prevent="form.delete(route('categories.delete', {category: props.category.id}))">
+                                    <form  @submit.prevent="form.delete(route('categories.destroy', {category: props.category.id}))">
                                       <button  type="submit"
                                         class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500">Delete</button>
                                    </form>

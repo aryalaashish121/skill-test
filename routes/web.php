@@ -17,7 +17,7 @@ Route::get('categories/create', [CategoryController::class, 'create'])->name('ca
 Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
 Route::get('categories/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
 Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
-Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.delete');
+Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.destroy');
 
 // Route::resource('products', ProductController::class);
 Route::prefix('products')->group(function(){
@@ -26,7 +26,7 @@ Route::prefix('products')->group(function(){
     Route::get('/create',[ProductController::class,'create'])->name('products.create');
     Route::post('/',[ProductController::class,'store'])->name('products.store');
     Route::get('/{product}',[ProductController::class,'edit'])->name('products.edit');
-    Route::patch('/{product}',[ProductController::class,'update'])->name('products.update');
+    Route::post('/{product}',[ProductController::class,'update'])->name('products.update');
     Route::delete('/{product}',[ProductController::class,'destroy'])->name('products.destroy');
 
 });
