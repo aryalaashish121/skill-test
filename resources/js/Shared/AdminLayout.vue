@@ -20,7 +20,7 @@
 
 
         <div class="py-10">
-            <alert-box v-if="$page.props.flash?.message"  :success="true" :message="$page.props.flash?.message"></alert-box>
+            <alert-box v-if="$page.props.flash?.message"  :success="$page.props.flash.success" :message="$page.props.flash?.message"></alert-box>
                 <slot></slot>
         </div>
     </div>

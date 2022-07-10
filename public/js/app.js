@@ -23496,11 +23496,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* CLASS, PROPS */
   , _hoisted_9)])])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(_ctx$$page$props$flas = _ctx.$page.props.flash) !== null && _ctx$$page$props$flas !== void 0 && _ctx$$page$props$flas.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)($setup["AlertBox"], {
     key: 0,
-    success: true,
+    success: _ctx.$page.props.flash.success,
     message: (_ctx$$page$props$flas2 = _ctx.$page.props.flash) === null || _ctx$$page$props$flas2 === void 0 ? void 0 : _ctx$$page$props$flas2.message
   }, null, 8
   /* PROPS */
-  , ["message"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])]);
+  , ["success", "message"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderSlot)(_ctx.$slots, "default")])]);
 }
 
 /***/ }),
