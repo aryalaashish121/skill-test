@@ -23,20 +23,25 @@
                                         <label for="category-title" class="block text-sm font-medium text-gray-700">Title</label>
                                         <div class="mt-1 flex rounded-md shadow-sm">
                                             <input v-model="form.title" type="text" id="category-title"
-                                                :class="{ 'border-red-500': form.errors.title }"
-                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm border-gray-300"
-                                                placeholder="Title">
+                                                class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-md sm:text-sm"
+                                                :class="form.errors.title?'border-red-500':'border-gray-300'"
+                                                placeholder="Title"
+                                                :aria-errormessage="form.errors.title"
+                                                >
+
                                         </div>
+                                                <p class="text-red-500 text-xs italic ">  {{form.errors.title}}</p>
                                     </div>
 
                                     <div>
                                         <label for="category-description" class="block text-sm font-medium text-gray-700">Description</label>
                                         <div class="mt-1">
                                             <textarea v-model="form.description" id="category-description" rows="3"
-                                                :class="{ 'border-red-500': form.errors.description }"
+                                                                                               :class="form.errors.description?'border-red-500':'border-gray-300'"
                                                 class="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-300 rounded-md"
                                                 placeholder="Description"></textarea>
                                         </div>
+                                                <p class="text-red-500 text-xs italic ">  {{form.errors.description}}</p>
                                         <p class="mt-2 text-sm text-gray-500">Brief description for the category.</p>
                                     </div>
                                 </div>
@@ -76,6 +81,10 @@ const props = defineProps({
     success:{
         type:String,
         required:false
+    },
+    errors:{
+        type:Object,
+        required:false
     }
 })
 
@@ -83,4 +92,5 @@ const form = useForm({
     title: props.category.title,
     description: props.category.description
 })
+// form.errors = props.errors;
 </script>

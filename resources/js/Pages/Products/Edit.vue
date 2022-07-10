@@ -66,9 +66,11 @@
                                             <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">No</label>
                                         </div>
                                 </div>
+
                                 <div>
-                                     <label for="product-image" class="block text-sm font-medium text-gray-700">Product image</label>
-                                    <input class="block mb-5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="product_image" v-on:change="uploadImage" type="file">
+                                     <label for="product-image" class="block te message:{type:Array required:false}xt-sm font-medium text-gray-700">Product image</label>
+                                     <img :src="props.product.image" class="w-12"/>
+                                    <input class="block mb-5 w-full text-xs text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" id="product_image" v-on:input=" form.image = $event.target.files[0]" type="file">
 
                                 </div>
                                 </div>
@@ -110,10 +112,6 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    message:{
-        type:Array,
-        required:false
-    }
 })
 
 const form = useForm({
@@ -122,11 +120,7 @@ const form = useForm({
     category_id:props.product.category_id,
     price:props.product.price,
     in_stock:props.product.in_stock,
-    image:props.product.image
-})
-
-const successMsg = computed((props)=>{
-    return props?.message.success;
+    image:''
 })
 
 </script>

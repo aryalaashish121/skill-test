@@ -19,4 +19,14 @@ Route::get('categories/{category}', [CategoryController::class, 'edit'])->name('
 Route::patch('categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
 Route::delete('/categories/{category}',[CategoryController::class,'destroy'])->name('categories.delete');
 
-Route::resource('products', ProductController::class);
+// Route::resource('products', ProductController::class);
+Route::prefix('products')->group(function(){
+
+    Route::get('/',[ProductController::class,'index'])->name('products.index');
+    Route::get('/create',[ProductController::class,'create'])->name('products.create');
+    Route::post('/',[ProductController::class,'store'])->name('products.store');
+    Route::get('/{product}',[ProductController::class,'edit'])->name('products.edit');
+    Route::patch('/{product}',[ProductController::class,'update'])->name('products.update');
+    Route::delete('/{product}',[ProductController::class,'destroy'])->name('products.destroy');
+
+});

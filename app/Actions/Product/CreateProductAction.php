@@ -26,7 +26,6 @@ class CreateProductAction
             'description' => $description,
             'price'=>$price,
             'category_id'=>$category_id,
-            'price'=>$price,
             'image'=>$image,
             'in_stock'=>$in_stock
         ]);

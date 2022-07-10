@@ -24,7 +24,7 @@ class CategoryController extends Controller
     {
         return Inertia::render('Categories/Index', [
             'categories' => Category::all()
-        ])->with('message',"Added successfully");
+        ]);
     }
     /**
      * Show the create category view.
@@ -51,7 +51,10 @@ class CategoryController extends Controller
             'description' => ['required']
         ]);
         $category = app(CreateCategory::class)->execute($request->title, $request->description);
-        return Redirect::route('categories.index', $category)->with('success',"Added successfully");
+        return Redirect::route('categories.index', $category)->with([
+            'message'=>__('response.created',['Resource'=>'Category']),
+            'success'=>true
+        ]);
     }
 
     /**
@@ -86,12 +89,19 @@ class CategoryController extends Controller
 
         $category = app(UpdateCategory::class)->execute($category, $request->title, $request->description);
 
-        return Redirect::back();
+        return Redirect::back()->with([
+            'message'=>__('response.updated',['Resource'=>'Category']),
+            'success'=>true
+        ]);
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
-        return Redirect::route('categories.index')->with('message','Category deleted successfully.');
+        return Redirect::route('categories.index')->with([
+            'message'=>__('response.deleted',['Resource'=>'Category']),
+            'success'=>true
+        ]);
+
     }
 }

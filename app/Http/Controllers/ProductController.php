@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Actions\Product\CreateProductAction;
 use App\Actions\Product\UpdateProductAction;
 use App\Actions\Upload\UploadImageAction;
+use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Session;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -44,7 +47,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $imageName = "";
         if($request->hasFile('image'))
@@ -52,7 +55,10 @@ class ProductController extends Controller
             $imageName = app(UploadImageAction::class)->execute($request->image);
         }
         $product = app(CreateProductAction::class)->execute($request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$imageName);
-        return Redirect::route('products.edit',$product);
+        return Redirect::route('products.edit',$product)->with([
+            'message'=>__('response.created',['Resource'=>'Product']),
+            'success'=>true
+        ]);
     }
 
     /**
@@ -87,11 +93,19 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(ProductRequest $request, Product $product)
     {
-        $updatedProduct = app(UpdateProductAction::class)->execute($product,$request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$request->image);
-        return Redirect::route('products.edit',$product);
+        $imageName = "";
+        if($request->hasFile('image'))
+        {
+            $imageName = app(UploadImageAction::class)->execute($request->image);
+        }
+        $updatedProduct = app(UpdateProductAction::class)->execute($product,$request->title,$request->description,$request->category_id,$request->price,$request->in_stock,$imageName);
 
+        return Redirect::back()->setStatusCode(303)->with([
+            'message'=>__('response.updated',['Resource'=>'Product']),
+            'success'=>true
+        ]);
     }
 
     /**
@@ -103,6 +117,9 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return Redirect::route('products.index');
+        return Redirect::route('products.index')->with([
+            'message'=> __('response.deleted',['Resource'=>'Product']),
+            'success'=>true
+        ]);
     }
 }
